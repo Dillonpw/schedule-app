@@ -1,3 +1,7 @@
+
+
+
+
 function generateRotatingSchedule(workDays, offDays, totalDays, startDate) {
     const schedule = [];
     let currentDate = new Date(startDate); // Initialize with the selected start date
@@ -39,9 +43,12 @@ function generateSchedule() {
     const offDays = parseInt(document.getElementById('offDays').value, 10);
     const totalDays = parseInt(document.getElementById('totalDays').value, 10);
     const startDate = document.getElementById('startDate').value;
+    const startHint = document.getElementById('startHint');
+
+} 
 
     const scheduleTable = document.getElementById('scheduleTable');
-    scheduleTable.innerHTML = ''; // Clear previous schedule
+    scheduleTable.innerHTML = ''; 
 
     const rotatingSchedule = generateRotatingSchedule(workDays, offDays, totalDays, startDate);
 
@@ -58,11 +65,12 @@ function generateSchedule() {
         row.appendChild(shiftCell);
         scheduleTable.appendChild(row);
     });
-}
+
 
 // Add an event listener to the button to trigger the schedule generation
 const generateButton = document.querySelector('button');
 generateButton.addEventListener('click', generateSchedule);
+
 
 // Initial schedule generation
 generateSchedule();
