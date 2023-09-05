@@ -1,35 +1,26 @@
-
-
-
-
 function generateRotatingSchedule(workDays, offDays, totalDays, startDate) {
     const schedule = [];
-    let currentDate = new Date(startDate); // Initialize with the selected start date
+    let currentDate = new Date(Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate())); // Initialize with the selected start date
     let daysScheduled = 0;
-
-
-    currentDate.setDate(currentDate.getDate() + 1);
 
     while (daysScheduled < totalDays) {
         const formattedDate = formatDate(currentDate);
-        const dayOfWeek = getDayOfWeek(currentDate.getDay());
+        const dayOfWeek = getDayOfWeek(currentDate.getUTCDay());
         const shift = daysScheduled % (workDays + offDays) < workDays ? 'Work' : 'Off';
 
         schedule.push({ date: formattedDate, dayOfWeek, shift });
 
-        currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
         daysScheduled++;
+        currentDate.setUTCDate(currentDate.getUTCDate() + 1); // Move to the next day
     }
 
     return schedule;
 }
 
-
-
 function formatDate(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
 }
 
@@ -42,13 +33,17 @@ function generateSchedule() {
     const workDays = parseInt(document.getElementById('workDays').value, 10);
     const offDays = parseInt(document.getElementById('offDays').value, 10);
     const totalDays = parseInt(document.getElementById('totalDays').value, 10);
-    const startDate = document.getElementById('startDate').value;
-    const startHint = document.getElementById('startHint');
+    const startDateInput = document.getElementById('startDate').value;
 
-} 
+    // Parse the start date string into a local date (not UTC)
+    const startDate = new Date(
+        parseInt(startDateInput.substring(0, 4), 10),
+        parseInt(startDateInput.substring(5, 7), 10) - 1, // Month is 0-based
+        parseInt(startDateInput.substring(8, 10), 10)
+    );
 
     const scheduleTable = document.getElementById('scheduleTable');
-    scheduleTable.innerHTML = ''; 
+    scheduleTable.innerHTML = '';
 
     const rotatingSchedule = generateRotatingSchedule(workDays, offDays, totalDays, startDate);
 
@@ -65,12 +60,11 @@ function generateSchedule() {
         row.appendChild(shiftCell);
         scheduleTable.appendChild(row);
     });
-
+}
 
 // Add an event listener to the button to trigger the schedule generation
-const generateButton = document.querySelector('button');
+const generateButton = document.getElementById('generateButton');
 generateButton.addEventListener('click', generateSchedule);
-
 
 // Initial schedule generation
 generateSchedule();
