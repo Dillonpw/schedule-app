@@ -13,7 +13,7 @@
         />
     </head>
     <body>
-        <h1 class="header">Custom Rotating Work Schedule</h1>
+        <h1 class="header">Rotating Work Schedule</h1>
         <div class="container">
             <form class="scheduling">
                 <div class="input-group">
@@ -35,9 +35,13 @@
                 </div>
 
                 <div class="input-group">
-                    <button type="button" onclick="generateSchedule()">Generate Schedule</button>
+                    <button type="button"  onclick="generateSchedule()">Generate Schedule</button>
                 </div>
             </form>
+            <div class="toggle-container">
+                <input type="checkbox" id="viewToggle" />
+                <label for="viewToggle">Switch to Calendar View</label>
+            </div>
         </div>
         
         <table border="1">
@@ -52,6 +56,9 @@
                 <!-- Schedule data will be inserted here using JavaScript -->
             </tbody>
         </table>
+        <div class="calendar-view" id="calendarView">
+            <!-- Calendar data will be inserted here using JavaScript -->
+        </div>
         <script src="main.js"></script>
     </body>
     
