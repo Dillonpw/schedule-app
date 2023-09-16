@@ -1,10 +1,12 @@
-/* Common styles for both views */
+:root{
+    --primary-color:rgb(148, 203, 225);
+}
 * {
     font-family: Montserrat;
 }
 
 body {
-    background-color: rgba(243, 233, 143, 0.817);
+    background-color: var(--primary-color)
 }
 
 .header {
