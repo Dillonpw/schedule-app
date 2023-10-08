@@ -1,97 +1,23 @@
-:root{
-    --primary-color:rgb(148, 203, 225);
+
+:root {
+    --primary-color: rgb(148, 203, 225);
+    --header-bg-color: #000000;
+    --even-row-color: #d5d1d1;
+    --odd-row-color: #ffffff;
+    --work-highlight: #e6f7ff;
+    --off-highlight: #ffedea;
 }
+
+/* Reset and Base Styles */
 * {
     font-family: Montserrat;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: var(--primary-color)
-}
-
-.header {
-    text-align: center;
-}
-
-table {
-    width: 80%;
-    margin: 20px auto;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    border: none;
-    /* Table view styles */
-    display: table;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
-}
-
-th {
-    background-color: #000000;
-    color: white;
-}
-
-tr:nth-child(even) {
-    background-color: #d5d1d1;
-}
-
-tr:nth-child(odd) {
-    background-color: #ffffff;
-}
-
-/* Calendar view styles */
-.calendar-view {
-    display: none;
-}
-
-#calendarView {
-    font-family: Arial, sans-serif;
-    margin-top: 20px;
-}
-
-#calendarView div {
-    margin-bottom: 20px;
-}
-
-#calendarView h3 {
-    text-align: center;
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    border-radius: 5px 5px 0 0;
-}
-
-#calendarView div > div {
-    /* Style for each week row */
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    border: 1px solid #ccc;
-    border-top: none; /* No top border to avoid double borders */
-}
-
-#calendarView span {
-    border-top: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-}
-
-/* Styles for the header containing day names (Sun, Mon, etc.) */
-#calendarView div > div:first-child {
-    background-color: #f4f4f4;
-    font-weight: bold;
-}
-
-/* Highlight work days with a subtle background */
-span:contains('Work') {
-    background-color: #e6f7ff;
-}
-
-/* Highlight off days with a subtle background */
-span:contains('Off') {
-    background-color: #ffedea;
+    background-color: var(--primary-color);
+    margin: 0;
+    padding: 0;
 }
 
 .container {
@@ -102,42 +28,124 @@ span:contains('Off') {
     margin-top: 80px;
 }
 
-.input-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
+.header {
     text-align: center;
 }
 
-.input-group label {
-    margin: 10px;
-    flex: 0 1 30%;
+.input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
     text-align: center;
+}
+
+.input-group label,
+.input-group input {
+    margin: 10px;
 }
 
 .input-group input[type='number'],
 .input-group input[type='date'] {
-    flex: 1;
-    width: 16rem;
-    margin-right: 10px;
+    width: 90%;
+    max-width: 300px;
     padding: 10px;
     border-radius: 1rem;
 }
 
-#startHint {
-    font-size: 12px;
+.button {
+    width: 90%;
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 1rem;
+}
+
+/* Table Styles */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
     text-align: center;
-    line-height: 0.2px;
-    margin-bottom: 10px;
-    display: none;
 }
 
-button {
-    width: 16rem;
-    margin-left: 9rem;
-    margin-right: 10px;
+th {
+    background-color: var(--header-bg-color);
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: var(--even-row-color);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--odd-row-color);
+}
+
+/* Calendar Styles */
+#calendarView {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#calendarView > div {
+    width: 100%; 
+}
+
+#calendarView div > div {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+#calendarView h3 {
+    text-align: center;
+    background-color: var(--header-bg-color);
+    color: white;
     padding: 10px;
-    border-radius: 1rem;
+    border-radius: 5px 5px 0 0;
+}
+
+#calendarView span {
+    font-size: 0.8em;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-bottom: none;
+}
+
+
+#calendarView div > div:not(:first-child) span:nth-child(even) {
+    background-color: var(--even-row-color);
+}
+
+#calendarView div > div:not(:first-child) span:nth-child(odd) {
+    background-color: var(--odd-row-color);
+}
+
+span:contains('Work') {
+    background-color: var(--work-highlight);
+}
+
+span:contains('Off') {
+    background-color: var(--off-highlight);
+}
+
+@media (min-width: 481px) {
+    #calendarView > div {
+        max-width: 80%; 
+        margin: auto;
+    }
+
+    #calendarView span {
+        font-size: 1em;
+        padding: 10px;
+    }
 }

@@ -18,24 +18,43 @@
             <form class="scheduling">
                 <div class="input-group">
                     <label for="workDays">Work Days:</label>
-                    <input type="number" id="workDays" min="1" placeholder="Enter Number of Work Days" required/>
+                    <input
+                        type="number"
+                        id="workDays"
+                        min="1"
+                        placeholder="Enter Number of Work Days"
+                        required
+                    />
                 </div>
                 <div class="input-group">
                     <label for="offDays">Off Days:</label>
-                    <input type="number" id="offDays" min="1" placeholder="Enter Number of Days Off"  required/>
+                    <input
+                        type="number"
+                        id="offDays"
+                        min="1"
+                        placeholder="Enter Number of Days Off"
+                        required
+                    />
                 </div>
                 <div class="input-group">
                     <label for="totalDays">Total Days:</label>
-                    <input type="number" id="totalDays" min="1" placeholder="How many days to schedule" required/>
+                    <input
+                        type="number"
+                        id="totalDays"
+                        min="1"
+                        placeholder="How many days to schedule"
+                        required
+                    />
                 </div>
                 <div class="input-group">
                     <label for="startDate">Start Date:</label>
-                    <input type="date" id="startDate" required/>
-                
+                    <input type="date" id="startDate" required />
                 </div>
 
                 <div class="input-group">
-                    <button type="button"  onclick="generateSchedule()">Generate Schedule</button>
+                    <button type="button" onclick="generateSchedule()">
+                        Generate Schedule
+                    </button>
                 </div>
             </form>
             <div class="toggle-container">
@@ -43,7 +62,7 @@
                 <label for="viewToggle">Switch to Calendar View</label>
             </div>
         </div>
-        
+
         <table border="1">
             <thead>
                 <tr>
@@ -61,5 +80,4 @@
         </div>
         <script src="main.js"></script>
     </body>
-    
 </html>
