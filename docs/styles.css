@@ -32,6 +32,10 @@ body {
     text-align: center;
 }
 
+input{
+    border: none;
+}
+
 .input-group {
     display: flex;
     align-items: center;
@@ -63,6 +67,12 @@ body {
 }
 
 /* Table Styles */
+#tableWrapper {
+    width: 80%;
+    margin: 20px auto;
+    display: block;
+}
+
 table {
     width: 80%;
     margin: 20px auto;
@@ -91,9 +101,14 @@ tr:nth-child(odd) {
 }
 
 /* Calendar Styles */
-#calendarView {
-    width: 100%;
-    margin-top: 20px;
+#calendarView span {
+    display: inline-block;
+    width: calc(100% / 7);
+    margin: 2px;
+    padding: 5px;
+    text-align: center;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
 }
 
 #calendarView > div {
@@ -119,6 +134,7 @@ tr:nth-child(odd) {
     text-align: center;
     border: 1px solid #ccc;
     border-bottom: none;
+    min-width: 60px;
 }
 
 
@@ -148,4 +164,9 @@ span:contains('Off') {
         font-size: 1em;
         padding: 10px;
     }
+}
+
+footer{
+    margin-left: 10px;
+    text-align: center;
 }

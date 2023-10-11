@@ -1,23 +1,4 @@
-const formatDate = (date) =>
-    `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
-        2,
-        '0'
-    )}-${String(date.getUTCDate()).padStart(2, '0')}`;
-
-const getDayOfWeek = (dayIndex) => {
-    const days = [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-    ];
-    return days[dayIndex];
-};
-
-const generateRotatingSchedule = (workDays, offDays, totalDays, startDate) => {
+function generateRotatingSchedule(workDays, offDays, totalDays, startDate) {
     const schedule = [];
     let currentDate = new Date(
         Date.UTC(
@@ -35,37 +16,45 @@ const generateRotatingSchedule = (workDays, offDays, totalDays, startDate) => {
             daysScheduled % (workDays + offDays) < workDays ? 'Work' : 'Off';
 
         schedule.push({ date: formattedDate, dayOfWeek, shift });
+
         daysScheduled++;
         currentDate.setUTCDate(currentDate.getUTCDate() + 1);
     }
 
     return schedule;
-};
+}
 
-const updateView = (viewToggleChecked, rotatingSchedule) => {
-    const table = document.querySelector('table');
-    const calendar = document.getElementById('calendarView');
+function formatDate(date) {
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
 
-    if (viewToggleChecked) {
-        table.style.display = 'none';
-        calendar.style.display = 'block';
-        renderCalendar(rotatingSchedule);
-    } else {
-        table.style.display = 'table';
-        calendar.style.display = 'none';
-        renderTableView(rotatingSchedule);
-    }
-};
+function getDayOfWeek(dayIndex) {
+    const days = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+    ];
+    return days[dayIndex];
+}
 
-const generateSchedule = () => {
+function generateSchedule() {
     const workDays = parseInt(document.getElementById('workDays').value, 10);
     const offDays = parseInt(document.getElementById('offDays').value, 10);
     const totalDays = parseInt(document.getElementById('totalDays').value, 10);
-    const [year, month, day] = document
-        .getElementById('startDate')
-        .value.split('-')
-        .map(Number);
-    const startDate = new Date(year, month - 1, day);
+    const startDateInput = document.getElementById('startDate').value;
+
+    const startDate = new Date(
+        parseInt(startDateInput.substring(0, 4), 10),
+        parseInt(startDateInput.substring(5, 7), 10) - 1,
+        parseInt(startDateInput.substring(8, 10), 10)
+    );
 
     const rotatingSchedule = generateRotatingSchedule(
         workDays,
@@ -74,43 +63,138 @@ const generateSchedule = () => {
         startDate
     );
 
-    updateView(document.getElementById('viewToggle').checked, rotatingSchedule);
+    if (document.getElementById('viewToggle').checked) {
+        renderCalendar(rotatingSchedule);
+    } else {
+        renderTableView(rotatingSchedule);
+    }
+}
 
-    // Save inputs to local storage
-    localStorage.setItem('workDays', workDays.toString());
-    localStorage.setItem('offDays', offDays.toString());
-    localStorage.setItem('totalDays', totalDays.toString());
-    localStorage.setItem('startDate', `${year}-${month}-${day}`);
-};
+document.getElementById('viewToggle').addEventListener('change', function () {
+    const tableWrapper = document.getElementById('tableWrapper');
+    const calendar = document.getElementById('calendarView');
 
-document.getElementById('viewToggle').addEventListener('change', (event) => {
-    updateView(
-        event.target.checked,
-        generateRotatingSchedule(
-            parseInt(document.getElementById('workDays').value, 10),
-            parseInt(document.getElementById('offDays').value, 10),
-            parseInt(document.getElementById('totalDays').value, 10),
-            new Date(
-                ...document
-                    .getElementById('startDate')
-                    .value.split('-')
-                    .map(Number)
-            )
-        )
-    );
+    if (this.checked) {
+        tableWrapper.style.display = 'none';
+        calendar.style.display = 'block';
+        generateSchedule();
+    } else {
+        tableWrapper.style.display = 'block';
+        calendar.style.display = 'none';
+        generateSchedule();
+    }
 });
 
-document
-    .getElementById('generateButton')
-    .addEventListener('click', generateSchedule);
+function renderCalendar(schedule) {
+    const calendarView = document.getElementById('calendarView');
+    calendarView.innerHTML = '';
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Load inputs from local storage
-    const keys = ['workDays', 'offDays', 'totalDays', 'startDate'];
-    keys.forEach((key) => {
-        const item = localStorage.getItem(key);
-        if (item) document.getElementById(key).value = item;
+    const startDate = new Date(schedule[0].date);
+    let currentMonth = startDate.getUTCMonth();
+    let currentYear = startDate.getUTCFullYear();
+
+    let monthSchedule = [];
+    for (let i = 0; i < schedule.length; i++) {
+        const entryDate = new Date(schedule[i].date);
+        if (entryDate.getUTCMonth() !== currentMonth) {
+            renderMonthCalendar(
+                monthSchedule,
+                currentMonth,
+                currentYear,
+                calendarView
+            );
+            monthSchedule = [];
+            currentMonth = entryDate.getUTCMonth();
+            currentYear = entryDate.getUTCFullYear();
+        }
+        monthSchedule.push(schedule[i]);
+    }
+    renderMonthCalendar(monthSchedule, currentMonth, currentYear, calendarView);
+}
+
+function renderMonthCalendar(monthSchedule, month, year, calendarView) {
+    const monthDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const monthNames = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+    ];
+
+    const monthContainer = document.createElement('div');
+    const monthHeader = document.createElement('h3');
+    monthHeader.textContent = `${monthNames[month]} ${year}`;
+    monthContainer.appendChild(monthHeader);
+
+    const daysHeader = document.createElement('div');
+    monthDays.forEach((day) => {
+        const dayElem = document.createElement('span');
+        dayElem.textContent = day;
+        daysHeader.appendChild(dayElem);
+    });
+    monthContainer.appendChild(daysHeader);
+
+    let weekRow = document.createElement('div');
+    let dayCounter = new Date(year, month, 1).getUTCDay();
+
+    for (let i = 0; i < dayCounter; i++) {
+        const blank = document.createElement('span');
+        blank.textContent = '';
+        weekRow.appendChild(blank);
+    }
+
+    monthSchedule.forEach((entry) => {
+        if (dayCounter === 7) {
+            monthContainer.appendChild(weekRow);
+            weekRow = document.createElement('div');
+            dayCounter = 0;
+        }
+        const dayElem = document.createElement('span');
+        dayElem.textContent = `${new Date(entry.date).getUTCDate()} - ${
+            entry.shift
+        }`;
+        weekRow.appendChild(dayElem);
+        dayCounter++;
     });
 
-    generateSchedule();
-});
+    while (dayCounter < 7) {
+        const blank = document.createElement('span');
+        blank.textContent = '';
+        weekRow.appendChild(blank);
+        dayCounter++;
+    }
+    monthContainer.appendChild(weekRow);
+    calendarView.appendChild(monthContainer);
+}
+
+function renderTableView(schedule) {
+    const scheduleTable = document.getElementById('scheduleTable');
+    scheduleTable.innerHTML = '';
+
+    schedule.forEach((entry) => {
+        const row = document.createElement('tr');
+        const dateCell = document.createElement('td');
+        dateCell.textContent = entry.date;
+        const dayOfWeekCell = document.createElement('td');
+        dayOfWeekCell.textContent = entry.dayOfWeek;
+        const shiftCell = document.createElement('td');
+        shiftCell.textContent = entry.shift;
+        row.appendChild(dateCell);
+        row.appendChild(dayOfWeekCell);
+        row.appendChild(shiftCell);
+        scheduleTable.appendChild(row);
+    });
+}
+
+const generateButton = document.querySelector('button');
+generateButton.addEventListener('click', generateSchedule);
+
+generateSchedule();

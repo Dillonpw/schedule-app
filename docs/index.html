@@ -52,7 +52,11 @@
                 </div>
 
                 <div class="input-group">
-                    <button type="button" onclick="generateSchedule()">
+                    <button
+                        type="button"
+                        id="generateButton"
+                        onclick="generateSchedule()"
+                    >
                         Generate Schedule
                     </button>
                 </div>
@@ -62,22 +66,29 @@
                 <label for="viewToggle">Switch to Calendar View</label>
             </div>
         </div>
-
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Day</th>
-                    <th>Shift</th>
-                </tr>
-            </thead>
-            <tbody id="scheduleTable">
-                <!-- Schedule data will be inserted here using JavaScript -->
-            </tbody>
-        </table>
+        <div id="tableWrapper">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Day</th>
+                        <th>Shift</th>
+                    </tr>
+                </thead>
+                <tbody id="scheduleTable">
+                    <!-- Schedule data will be inserted here using JavaScript -->
+                </tbody>
+            </table>
+        </div>
         <div class="calendar-view" id="calendarView">
             <!-- Calendar data will be inserted here using JavaScript -->
         </div>
+        <footer class="credits">
+            <p id="credit1">Created by Dillon Walsh. For more of my work check <a id="profile-link" href="https://github.com/Dillonpw/projects" target="_blank">Github</a>
+          </p>
+            <div class="copyr">&copy;<span id="year">2023<span> All Rights Reserved</span></div>
+            </p>
+        </footer>
         <script src="main.js"></script>
     </body>
 </html>
