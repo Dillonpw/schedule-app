@@ -154,7 +154,10 @@ span:contains('Off') {
     background-color: var(--off-highlight);
 }
 
-@media (min-width: 481px) {
+@media (max-width: 481px) {
+    #calendarView{
+        max-width: 320px;
+    }
     #calendarView > div {
         max-width: 80%; 
         margin: auto;
