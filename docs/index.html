@@ -22,7 +22,7 @@
                         type="number"
                         id="workDays"
                         min="1"
-                        placeholder="Enter Number of Work Days"
+                        
                         required
                     />
                 </div>
@@ -32,7 +32,7 @@
                         type="number"
                         id="offDays"
                         min="1"
-                        placeholder="Enter Number of Days Off"
+                        
                         required
                     />
                 </div>
@@ -42,7 +42,7 @@
                         type="number"
                         id="totalDays"
                         min="1"
-                        placeholder="How many days to schedule"
+                    
                         required
                     />
                 </div>
@@ -51,7 +51,7 @@
                     <input type="date" id="startDate" required />
                 </div>
 
-                <div class="input-group">
+                <div class="input-group" id="button-container">
                     <button
                         type="button"
                         id="generateButton"
@@ -62,8 +62,9 @@
                 </div>
             </form>
             <div class="toggle-container">
-                <input type="checkbox" id="viewToggle" />
-                <label for="viewToggle">Switch to Calendar View</label>
+                <label for="viewToggle">Switch Format</label>
+                <input type="checkbox" class="toggle-checkbox"id="viewToggle" />
+                <span class="slider"></span>
             </div>
         </div>
         <div id="tableWrapper">
