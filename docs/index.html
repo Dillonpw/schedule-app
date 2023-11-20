@@ -15,55 +15,32 @@
     <body>
         <h1 class="header">Rotating Work Schedule</h1>
         <div class="container">
+            <div id="textBubble"></div>
             <form class="scheduling">
-                <div class="input-group">
-                    <label for="workDays">Work Days:</label>
-                    <input
-                        type="number"
-                        id="workDays"
-                        min="1"
-                        
-                        required
-                    />
-                </div>
-                <div class="input-group">
-                    <label for="offDays">Off Days:</label>
-                    <input
-                        type="number"
-                        id="offDays"
-                        min="1"
-                        
-                        required
-                    />
-                </div>
-                <div class="input-group">
-                    <label for="totalDays">Total Days:</label>
-                    <input
-                        type="number"
-                        id="totalDays"
-                        min="1"
-                    
-                        required
-                    />
-                </div>
-                <div class="input-group">
-                    <label for="startDate">Start Date:</label>
-                    <input type="date" id="startDate" required />
-                </div>
+                <label for="workDays">Work Days:</label>
+                <input type="number" id="workDays" min="1" required />
+                <label for="offDays">Off Days:</label>
+                <input type="number" id="offDays" min="1" required />
+                <label for="totalDays">Total Days:</label>
+                <input type="number" id="totalDays" min="1" required />
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" required />
 
-                <div class="input-group" id="button-container">
-                    <button
-                        type="button"
-                        id="generateButton"
-                        onclick="generateSchedule()"
-                    >
-                        Generate Schedule
-                    </button>
-                </div>
+                <button
+                    type="button"
+                    id="generateButton"
+                    onclick="generateSchedule()"
+                >
+                    Generate Schedule
+                </button>
             </form>
             <div class="toggle-container">
                 <label for="viewToggle">Switch Format</label>
-                <input type="checkbox" class="toggle-checkbox"id="viewToggle" />
+                <input
+                    type="checkbox"
+                    class="toggle-checkbox"
+                    id="viewToggle"
+                />
                 <span class="slider"></span>
             </div>
         </div>
@@ -85,9 +62,15 @@
             <!-- Calendar data will be inserted here using JavaScript -->
         </div>
         <footer class="credits">
-            <p id="credit1">Created by Dillon Walsh. For more of my work check <a id="profile-link" href="https://github.com/Dillonpw/projects" target="_blank">Github</a>
-          </p>
-            <div class="copyr">&copy;<span id="year">2023<span> All Rights Reserved</span></div>
+            <p>
+                Created by Dillon Walsh. For more of my work check
+                <a
+                    id="profile-link"
+                    href="https://github.com/Dillonpw/projects"
+                    target="_blank"
+                    >Github</a
+                >
+                &copy; id="year">2023 All Rights Reserved
             </p>
         </footer>
         <script src="main.js"></script>

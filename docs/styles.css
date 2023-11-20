@@ -1,110 +1,89 @@
 :root {
-    --primary-color: white;
-    --header-bg-color: #000000;
+    --primary-color: rgba(36, 127, 255, 0.861);
+    --header-bg-color: #0000008b;
     --even-row-color: #d5d1d1;
     --odd-row-color: #e1e0e0;
     --work-highlight: #e6f7ff;
     --off-highlight: #ffedea;
 }
 
-/* Reset and Base Styles */
 * {
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
 }
 
 body {
     background-color: var(--primary-color);
     margin: 0;
-    padding: 0;
     min-width: 320px;
 }
 
-.container {
+.header {
+    margin: 0;
+    padding: 1rem 2rem;
+    background-color: var(--header-bg-color);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.header {
+    font-size: 22px;
+}
+
+.container,
+.toggle-container,
+#tableWrapper,
+.calendar-view {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 80px;
+    margin: 20px auto;
 }
 
-.header {
+#generateButton,
+th,
+#calendarView h3 {
     text-align: center;
+    background-color: var(--header-bg-color);
+    color: white;
+    padding: 10px;
+    border-radius: 0.5rem;
+    margin: 20px auto;
 }
+
 
 form {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-gap: 0.25rem;
+    width: 40%;
+    max-width: 500px;
 }
 
-input {
+input[type='number'],
+input[type='date'] {
     border: 2px solid black;
-    background-color: var(--primary-color);
-    min-width: 80px;
-    word-wrap: none;
-}
-
-.input-group {
-    margin-bottom: 10px;
-    text-align: center;
-    min-width: 80px;
-}
-
-.input-group label,
-.input-group input {
-    margin: 10px;
-}
-
-.input-group input[type='number'],
-.input-group input[type='date'] {
-    width: 50%;
-    max-width: 300px;
-    padding: 8px;
     border-radius: 0.5rem;
-}
-
-#button-container{
-    grid-area: 3 / 1 / 4 / 3;
-    justify-self: center;
+    padding: 0.5rem;
+    background-color: white;
+    min-width: 80px;
 }
 
 #generateButton {
-    margin: 10px auto;
-    padding: 10px;
-    border-radius: 0.5rem;
-}
-
-.toggle-container {
-    display: flex;
-    flex-direction: column;
-}
-
-
-
-/* Table Styles */
-#tableWrapper {
-    width: 80%;
-    margin: 20px auto;
-    display: block;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    grid-area: 5/1/6/3;
 }
 
 table {
-    width: 80%;
-    margin: 20px auto;
-    border-radius: 0.5rem;
-    overflow: hidden;
+    width: 70%;
     border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 10px;
-    text-align: center;
-}
-
-th {
-    background-color: var(--header-bg-color);
-    color: white;
+    border-radius: 0.5rem;
 }
 
 tr:nth-child(even) {
@@ -116,48 +95,19 @@ tr:nth-child(odd) {
 }
 
 /* Calendar Styles */
+#calendarView > div {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+}
+
 #calendarView span {
     display: inline-block;
-    width: calc(100% / 7);
     margin: 2px;
     padding: 5px;
     text-align: center;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-}
-
-#calendarView > div {
-    width: 100%;
-}
-
-#calendarView div > div {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-}
-
-#calendarView h3 {
-    text-align: center;
-    background-color: var(--header-bg-color);
-    color: white;
-    padding: 10px;
-    border-radius: 5px 5px 0 0;
-}
-
-#calendarView span {
-    font-size: 0.8em;
-    padding: 5px;
-    text-align: center;
-    border: 1px solid #ccc;
-    border-bottom: none;
-    min-width: 60px;
-}
-
-#calendarView div > div:not(:first-child) span:nth-child(even) {
-    background-color: var(--even-row-color);
-}
-
-#calendarView div > div:not(:first-child) span:nth-child(odd) {
-    background-color: var(--odd-row-color);
 }
 
 span:contains('Work') {
@@ -169,14 +119,7 @@ span:contains('Off') {
 }
 
 @media (max-width: 500px) {
-    #calendarView {
-        max-width: 320px;
-    }
-    #calendarView > div {
-        max-width: 80%;
-        margin: auto;
-    }
-
+    #calendarView > div,
     #calendarView span {
         font-size: 1em;
         padding: 10px;
@@ -184,6 +127,7 @@ span:contains('Off') {
 }
 
 footer {
-    margin-left: 10px;
     text-align: center;
+    color: white;
+    margin-top: 20px;
 }
