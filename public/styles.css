@@ -27,16 +27,11 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 0 0 0.5rem 0.5rem;
-}
-
-.header {
     font-size: 22px;
 }
 
 .container,
-.toggle-container,
-#tableWrapper,
-.calendar-view {
+#tableWrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,8 +40,7 @@ body {
 }
 
 #generateButton,
-th,
-#calendarView h3 {
+th {
     text-align: center;
     background-color: var(--header-bg-color);
     color: white;
@@ -54,7 +48,6 @@ th,
     border-radius: 0.5rem;
     margin: 20px auto;
 }
-
 
 form {
     display: grid;
@@ -85,6 +78,9 @@ table {
     border-collapse: collapse;
     border-radius: 0.5rem;
 }
+thead{
+    border: transparent;
+}
 
 tr:nth-child(even) {
     background-color: var(--even-row-color);
@@ -94,35 +90,13 @@ tr:nth-child(odd) {
     background-color: var(--odd-row-color);
 }
 
-/* Calendar Styles */
-#calendarView > div {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-
-}
-
-#calendarView span {
-    display: inline-block;
-    margin: 2px;
-    padding: 5px;
-    text-align: center;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-}
-
-span:contains('Work') {
-    background-color: var(--work-highlight);
-}
-
-span:contains('Off') {
-    background-color: var(--off-highlight);
-}
-
 @media (max-width: 500px) {
-    #calendarView > div,
-    #calendarView span {
-        font-size: 1em;
-        padding: 10px;
+    form {
+        width: 80%;
+    }
+    
+    table {
+        width: 90%;
     }
 }
 
