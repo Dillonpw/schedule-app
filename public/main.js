@@ -78,14 +78,22 @@ function renderTableView(schedule) {
         dayOfWeekCell.textContent = entry.dayOfWeek;
         const shiftCell = document.createElement('td');
         shiftCell.textContent = entry.shift;
-        row.appendChild(dateCell);
         row.appendChild(dayOfWeekCell);
+        row.appendChild(dateCell);
         row.appendChild(shiftCell);
         scheduleTable.appendChild(row);
     });
 }
 
-document.querySelector('button').addEventListener('click', generateSchedule);
+const popUp = () => {
+    const popUp = document.getElementById('moreInfo');
+    if (popUp.style.display === 'none') {
+        popUp.style.display = 'flex';
+    } else {
+        popUp.style.display = 'none';
+    }
+};
 
-// Initial call to populate the schedule on page load
+document.getElementById('generate').addEventListener('click', generateSchedule);
+
 generateSchedule();

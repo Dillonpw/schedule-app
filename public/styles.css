@@ -1,5 +1,4 @@
 :root {
-    --primary-color: rgba(36, 127, 255, 0.861);
     --header-bg-color: #0000008b;
     --even-row-color: #d5d1d1;
     --odd-row-color: #e1e0e0;
@@ -10,24 +9,41 @@
 * {
     font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
+    overscroll-behavior: none;
+
 }
 
 body {
-    background-color: var(--primary-color);
+    background: linear-gradient(to bottom right,  #feb47b, #100cff9b);
     margin: 0;
     min-width: 320px;
 }
+.nav{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
 
 .header {
-    margin: 0;
+    margin: 2rem;
     padding: 1rem 2rem;
-    background-color: var(--header-bg-color);
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 0 0 0.5rem 0.5rem;
-    font-size: 22px;
+    font-size: 30px;
+}
+
+#moreInfo{
+    border: 3px solid grey;
+    border-radius: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10rem;
+    padding: 2rem;
+    background-color: var(--header-bg-color);
+    color: white;
 }
 
 .container,
@@ -39,14 +55,21 @@ body {
     margin: 20px auto;
 }
 
-#generateButton,
-th {
+Button{
     text-align: center;
     background-color: var(--header-bg-color);
     color: white;
-    padding: 10px;
+    padding: 1rem 2rem;
     border-radius: 0.5rem;
     margin: 20px auto;
+    border: none;
+    cursor: pointer;
+    grid-area: 5/1/6/3;
+    box-shadow: 0 0 10px 8px rgba(255, 255, 255, 0.181);
+}
+
+Button:hover{
+    transform: scale(1.1)
 }
 
 form {
@@ -55,6 +78,7 @@ form {
     grid-gap: 0.25rem;
     width: 40%;
     max-width: 500px;
+    margin-top: 2rem;
 }
 
 input[type='number'],
@@ -64,37 +88,47 @@ input[type='date'] {
     padding: 0.5rem;
     background-color: white;
     min-width: 80px;
+    box-shadow: 0 0 10px 8px rgba(255, 255, 255, 0.181);
+
 }
 
-#generateButton {
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    grid-area: 5/1/6/3;
-}
 
 table {
     width: 70%;
     border-collapse: collapse;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px 8px rgba(255, 255, 255, 0.181);
 }
-thead{
+
+th {
     border: transparent;
+    text-align: center;
+    background-color: var(--header-bg-color);
+    color: white;
+    border: 1px solid var(--header-bg-color);
+    padding: 1rem;
+    margin: 1rem auto;
+
 }
 
 tr:nth-child(even) {
     background-color: var(--even-row-color);
+    height: 3rem;
+    text-align: center;
 }
 
 tr:nth-child(odd) {
     background-color: var(--odd-row-color);
+    height: 3rem;
+    text-align: center;
+
 }
 
 @media (max-width: 500px) {
     form {
         width: 80%;
     }
-    
+
     table {
         width: 90%;
     }

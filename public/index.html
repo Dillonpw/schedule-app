@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Custom Rotating Work Schedule</title>
+        <link rel="icon" type="image/svg+xml" href="/assets/logo.svg" />
         <link rel="stylesheet" href="/styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,9 +14,18 @@
         />
     </head>
     <body>
-        <h1 class="header">Rotating Work Schedule</h1>
+
+            <h1 class="header">Rotating Work Schedule</h1>
         <div class="container">
-            <div id="textBubble"></div>
+            <button id="popBtn" onclick=popUp()>More Info</button>
+
+            <div id="moreInfo"  style="display: none;">
+                <p>
+                    fill out the boxes below to quickly see your work schedule
+                    for the number of days you decide. Make sure you start the
+                    scheduling on the first day of your work rotation!
+                </p>
+            </div>
             <form class="scheduling">
                 <label for="workDays">Work Days:</label>
                 <input type="number" id="workDays" min="1" required />
@@ -28,20 +38,19 @@
 
                 <button
                     type="button"
-                    id="generateButton"
+                    id="generate"
                     onclick="generateSchedule()"
                 >
-                    Generate Schedule
+                    Show Schedule
                 </button>
             </form>
-
         </div>
         <div id="tableWrapper">
             <table border="1">
                 <thead>
                     <tr>
-                        <th>Date</th>
                         <th>Day</th>
+                        <th>Date</th>
                         <th>Shift</th>
                     </tr>
                 </thead>
@@ -52,13 +61,13 @@
         </div>
         <footer class="credits">
             <p>
-                Created by Dillon Walsh. <br/>For more of my work check
+                Created by Dillon Walsh. <br />For more of my work check
                 <a
                     id="profile-link"
                     href="https://github.com/Dillonpw/projects"
                     target="_blank"
                     >Github</a
-                ><br/>
+                ><br />
                 &copy;2023 All Rights Reserved
             </p>
         </footer>
