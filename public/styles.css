@@ -44,6 +44,11 @@ body {
     padding: 2rem;
     background-color: var(--header-bg-color);
     color: white;
+    user-select: none;
+}
+
+#moreInfo:hover{
+    transform: scale(1.1);
 }
 
 .container,

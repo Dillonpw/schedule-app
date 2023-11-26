@@ -87,12 +87,18 @@ function renderTableView(schedule) {
 
 const popUp = () => {
     const popUp = document.getElementById('moreInfo');
-    if (popUp.style.display === 'none') {
-        popUp.style.display = 'flex';
-    } else {
-        popUp.style.display = 'none';
-    }
+    const button = document.getElementById('popBtn');
+    popUp.style.display = 'flex';
+    button.style.display = 'none';
 };
+
+const popDown = () => {
+    const popUp = document.getElementById('moreInfo');
+    const button = document.getElementById('popBtn');
+    popUp.style.display = 'none';
+    button.style.display = 'block';
+};
+
 
 document.getElementById('generate').addEventListener('click', generateSchedule);
 
