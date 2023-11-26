@@ -1,29 +1,3 @@
-function generateRotatingSchedule(workDays, offDays, totalDays, startDate) {
-    const schedule = [];
-    let currentDate = new Date(
-        Date.UTC(
-            startDate.getFullYear(),
-            startDate.getMonth(),
-            startDate.getDate()
-        )
-    );
-    let daysScheduled = 0;
-
-    while (daysScheduled < totalDays) {
-        const formattedDate = formatDate(currentDate);
-        const dayOfWeek = getDayOfWeek(currentDate.getUTCDay());
-        const shift =
-            daysScheduled % (workDays + offDays) < workDays ? 'Work' : 'Off';
-
-        schedule.push({ date: formattedDate, dayOfWeek, shift });
-
-        daysScheduled++;
-        currentDate.setUTCDate(currentDate.getUTCDate() + 1);
-    }
-
-    return schedule;
-}
-
 function formatDate(date) {
     const year = date.getUTCFullYear();
     const month = String(date.getUTCMonth() + 1).padStart(2, '0');
@@ -33,15 +7,25 @@ function formatDate(date) {
 
 function getDayOfWeek(dayIndex) {
     const days = [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
+        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
     ];
     return days[dayIndex];
+}
+
+function generateRotatingSchedule(workDays, offDays, totalDays, startDate) {
+    const schedule = [];
+    let currentDate = new Date(startDate);
+    let daysScheduled = 0;
+
+    while (daysScheduled < totalDays) {
+        const formattedDate = formatDate(currentDate);
+        const dayOfWeek = getDayOfWeek(currentDate.getDay());
+        const shift = daysScheduled % (workDays + offDays) < workDays ? 'Work' : 'Off';
+        schedule.push({ date: formattedDate, dayOfWeek, shift });
+        daysScheduled++;
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return schedule;
 }
 
 function generateSchedule() {
@@ -49,27 +33,20 @@ function generateSchedule() {
     const offDays = parseInt(document.getElementById('offDays').value, 10);
     const totalDays = parseInt(document.getElementById('totalDays').value, 10);
     const startDateInput = document.getElementById('startDate').value;
+    const startDate = new Date(startDateInput);
 
-    const startDate = new Date(
-        parseInt(startDateInput.substring(0, 4), 10),
-        parseInt(startDateInput.substring(5, 7), 10) - 1,
-        parseInt(startDateInput.substring(8, 10), 10)
-    );
-
-    const rotatingSchedule = generateRotatingSchedule(
-        workDays,
-        offDays,
-        totalDays,
-        startDate
-    );
-
+    const rotatingSchedule = generateRotatingSchedule(workDays, offDays, totalDays, startDate);
     renderTableView(rotatingSchedule);
+
+    setCookie('workDays', workDays, 7);
+    setCookie('offDays', offDays, 7);
+    setCookie('totalDays', totalDays, 7);
+    setCookie('startDate', startDateInput, 7);
 }
 
 function renderTableView(schedule) {
     const scheduleTable = document.getElementById('scheduleTable');
     scheduleTable.innerHTML = '';
-
     schedule.forEach((entry) => {
         const row = document.createElement('tr');
         const dateCell = document.createElement('td');
@@ -85,21 +62,33 @@ function renderTableView(schedule) {
     });
 }
 
-const popUp = () => {
-    const popUp = document.getElementById('moreInfo');
-    const button = document.getElementById('popBtn');
-    popUp.style.display = 'flex';
-    button.style.display = 'none';
-};
+function setCookie(name, value, daysToExpire) {
+    const date = new Date();
+    date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
 
-const popDown = () => {
-    const popUp = document.getElementById('moreInfo');
-    const button = document.getElementById('popBtn');
-    popUp.style.display = 'none';
-    button.style.display = 'block';
-};
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for(let i=0;i < ca.length;i++) {
+        let c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length);
+    }
+    return null;
+}
 
+function prefillInputs() {
+    document.getElementById('workDays').value = getCookie('workDays') || '';
+    document.getElementById('offDays').value = getCookie('offDays') || '';
+    document.getElementById('totalDays').value = getCookie('totalDays') || '';
+    document.getElementById('startDate').value = getCookie('startDate') || '';
+}
 
 document.getElementById('generate').addEventListener('click', generateSchedule);
 
-generateSchedule();
+window.onload = function() {
+    prefillInputs();
+};

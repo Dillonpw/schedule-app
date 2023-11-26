@@ -10,33 +10,40 @@
     font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
     overscroll-behavior: none;
+}
 
+html {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #00000078;
 }
 
 body {
-    background: linear-gradient(to bottom right,  #feb47b, #100cff9b);
-    margin: 0;
     min-width: 320px;
 }
-.nav{
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header {
-    margin: 2rem;
     padding: 1rem 2rem;
     color: white;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     border-radius: 0 0 0.5rem 0.5rem;
-    font-size: 30px;
+    font-size: 20px;
 }
 
-#moreInfo{
-    border: 3px solid grey;
+h1,h2{
+    margin: 0;
+}
+
+#moreInfo {
     border-radius: 1rem;
     justify-content: center;
     align-items: center;
@@ -45,10 +52,13 @@ body {
     background-color: var(--header-bg-color);
     color: white;
     user-select: none;
+    cursor: pointer;
+    max-width: 50%;
+    box-shadow: 0 0 10px 8px rgba(255, 255, 255, 0.181);
 }
 
-#moreInfo:hover{
-    transform: scale(1.1);
+#moreInfo:hover {
+    transform: scale(1.05);
 }
 
 .container,
@@ -60,7 +70,7 @@ body {
     margin: 20px auto;
 }
 
-Button{
+Button {
     text-align: center;
     background-color: var(--header-bg-color);
     color: white;
@@ -73,17 +83,23 @@ Button{
     box-shadow: 0 0 10px 8px rgba(255, 255, 255, 0.181);
 }
 
-Button:hover{
-    transform: scale(1.1)
+Button:hover {
+    transform: scale(1.1);
 }
 
 form {
+    color: black;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 0.25rem;
-    width: 40%;
     max-width: 500px;
+    min-width: 60%;
     margin-top: 2rem;
+    margin-bottom: 6rem;
+    border: 3px solid gray;
+    border-radius: 2rem;
+    padding: 3rem;
+    background-color: white;
 }
 
 input[type='number'],
@@ -94,14 +110,11 @@ input[type='date'] {
     background-color: white;
     min-width: 80px;
     box-shadow: 0 0 10px 8px rgba(255, 255, 255, 0.181);
-
 }
 
-
 table {
-    width: 70%;
+    min-width: 70%;
     border-collapse: collapse;
-    border-radius: 1rem;
     box-shadow: 0 0 10px 8px rgba(255, 255, 255, 0.181);
 }
 
@@ -113,7 +126,6 @@ th {
     border: 1px solid var(--header-bg-color);
     padding: 1rem;
     margin: 1rem auto;
-
 }
 
 tr:nth-child(even) {
@@ -126,21 +138,20 @@ tr:nth-child(odd) {
     background-color: var(--odd-row-color);
     height: 3rem;
     text-align: center;
-
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
     form {
         width: 80%;
     }
 
     table {
-        width: 90%;
+        width: 70%;
     }
 }
 
 footer {
     text-align: center;
     color: white;
-    margin-top: 20px;
+    margin-top: 3rem;
 }

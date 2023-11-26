@@ -14,16 +14,18 @@
         />
     </head>
     <body>
-
-            <h1 class="header">Rotating Work Schedule</h1>
+        <div class="header">
+            <h1>Rotating Work Schedule</h1>
+            <h2>For Police, Fire, EMS, and Dispatchers</h2>
+        </div>
         <div class="container">
-            <button id="popBtn" onclick=popUp()>More Info</button>
+            <button id="popBtn" onclick="popUp()">More Info</button>
 
-            <div id="moreInfo" onclick=popDown() style="display: none;">
+            <div id="moreInfo" onclick="popDown()" style="display: none">
                 <p>
                     fill out the boxes below to quickly see your work schedule
-                    for the number of days you decide. Make sure you start the
-                    scheduling on the first day of your work rotation!
+                    for the number of days you decide. <br />Make sure you start
+                    the scheduling on the first day of your work rotation!
                 </p>
             </div>
             <form class="scheduling">
@@ -49,9 +51,9 @@
             <table border="1">
                 <thead>
                     <tr>
-                        <th>Day</th>
+                        <th>Week Day</th>
                         <th>Date</th>
-                        <th>Shift</th>
+                        <th>On/Off</th>
                     </tr>
                 </thead>
                 <tbody id="scheduleTable">
