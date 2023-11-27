@@ -18,7 +18,7 @@
             <h1>Rotating Work Schedule</h1>
             <h2>For Police, Fire, EMS, and Dispatchers</h2>
         </div>
-        <div class="container">
+        <div id="infoBox">
             <button id="popBtn" onclick="popUp()">More Info</button>
 
             <div id="moreInfo" onclick="popDown()" style="display: none">
@@ -28,6 +28,8 @@
                     the scheduling on the first day of your work rotation!
                 </p>
             </div>
+        </div>
+            <div class="container">
             <form class="scheduling">
                 <label for="workDays">Work Days:</label>
                 <input type="number" id="workDays" min="1" required />
@@ -46,20 +48,21 @@
                     Show Schedule
                 </button>
             </form>
-        </div>
-        <div id="tableWrapper">
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Week Day</th>
-                        <th>Date</th>
-                        <th>On/Off</th>
-                    </tr>
-                </thead>
-                <tbody id="scheduleTable">
-                    <!-- Schedule data will be inserted here using JavaScript -->
-                </tbody>
-            </table>
+
+            <div id="tableWrapper">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Week Day</th>
+                            <th>Date</th>
+                            <th>On/Off</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleTable">
+                        <!-- Schedule data will be inserted here using JavaScript -->
+                    </tbody>
+                </table>
+            </div>
         </div>
         <footer class="credits">
             <p>

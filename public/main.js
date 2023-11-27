@@ -7,7 +7,13 @@ function formatDate(date) {
 
 function getDayOfWeek(dayIndex) {
     const days = [
-        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
     ];
     return days[dayIndex];
 }
@@ -20,7 +26,8 @@ function generateRotatingSchedule(workDays, offDays, totalDays, startDate) {
     while (daysScheduled < totalDays) {
         const formattedDate = formatDate(currentDate);
         const dayOfWeek = getDayOfWeek(currentDate.getDay());
-        const shift = daysScheduled % (workDays + offDays) < workDays ? 'Work' : 'Off';
+        const shift =
+            daysScheduled % (workDays + offDays) < workDays ? 'Work' : 'Off';
         schedule.push({ date: formattedDate, dayOfWeek, shift });
         daysScheduled++;
         currentDate.setDate(currentDate.getDate() + 1);
@@ -35,7 +42,12 @@ function generateSchedule() {
     const startDateInput = document.getElementById('startDate').value;
     const startDate = new Date(startDateInput);
 
-    const rotatingSchedule = generateRotatingSchedule(workDays, offDays, totalDays, startDate);
+    const rotatingSchedule = generateRotatingSchedule(
+        workDays,
+        offDays,
+        totalDays,
+        startDate
+    );
     renderTableView(rotatingSchedule);
 
     setCookie('workDays', workDays, 7);
@@ -64,17 +76,17 @@ function renderTableView(schedule) {
 
 function setCookie(name, value, daysToExpire) {
     const date = new Date();
-    date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
-    const expires = "expires=" + date.toUTCString();
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    date.setTime(date.getTime() + daysToExpire * 24 * 60 * 60 * 1000);
+    const expires = 'expires=' + date.toUTCString();
+    document.cookie = name + '=' + value + ';' + expires + ';path=/';
 }
 
 function getCookie(name) {
-    const nameEQ = name + "=";
+    const nameEQ = name + '=';
     const ca = document.cookie.split(';');
-    for(let i=0;i < ca.length;i++) {
+    for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
+        while (c.charAt(0) == ' ') c = c.substring(1);
         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length);
     }
     return null;
@@ -86,9 +98,21 @@ function prefillInputs() {
     document.getElementById('totalDays').value = getCookie('totalDays') || '';
     document.getElementById('startDate').value = getCookie('startDate') || '';
 }
+const popUp = () => {
+    const popUp = document.getElementById('moreInfo');
+    const button = document.getElementById('popBtn');
+    popUp.style.display = 'flex';
+    button.style.display = 'none';
+};
 
+const popDown = () => {
+    const popUp = document.getElementById('moreInfo');
+    const button = document.getElementById('popBtn');
+    popUp.style.display = 'none';
+    button.style.display = 'block';
+};
 document.getElementById('generate').addEventListener('click', generateSchedule);
 
-window.onload = function() {
+window.onload = function () {
     prefillInputs();
 };

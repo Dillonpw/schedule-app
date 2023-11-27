@@ -16,7 +16,7 @@ html {
     height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: #00000078;
+    background-color: white;
 }
 
 body {
@@ -30,7 +30,7 @@ body {
 
 .header {
     padding: 1rem 2rem;
-    color: white;
+    color: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,22 +39,31 @@ body {
     font-size: 20px;
 }
 
-h1,h2{
-    margin: 0;
+h1,
+h2 {
+    margin: -0.3rem;
+}
+#infoBox{
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #moreInfo {
     border-radius: 1rem;
-    justify-content: center;
-    align-items: center;
     margin: 0 10rem;
     padding: 2rem;
-    background-color: var(--header-bg-color);
+    background-image: linear-gradient(
+        180deg,
+        hsl(0deg 0% 61%) 1%,
+        hsl(344deg 0% 30%) 50%,
+        hsl(0deg 0% 0%) 99%
+    );
     color: white;
     user-select: none;
     cursor: pointer;
     max-width: 50%;
-    box-shadow: 0 0 10px 8px rgba(255, 255, 255, 0.181);
+    box-shadow: 1.5px 3px 3px hsl(0deg 0% 0% / 0.45);
 }
 
 #moreInfo:hover {
@@ -67,12 +76,21 @@ h1,h2{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 20px auto;
+    margin: 1rem;
+}
+
+#tableWrapper{
+    width: 90%;
 }
 
 Button {
     text-align: center;
-    background-color: var(--header-bg-color);
+    background-image: linear-gradient(
+        180deg,
+        hsl(0deg 0% 61%) 1%,
+        hsl(344deg 0% 30%) 50%,
+        hsl(0deg 0% 0%) 99%
+    );
     color: white;
     padding: 1rem 2rem;
     border-radius: 0.5rem;
@@ -80,13 +98,16 @@ Button {
     border: none;
     cursor: pointer;
     grid-area: 5/1/6/3;
-    box-shadow: 0 0 10px 8px rgba(255, 255, 255, 0.181);
+    box-shadow: 1.5px 3px 3px hsl(0deg 0% 0% / 0.45);
 }
 
 Button:hover {
     transform: scale(1.1);
 }
-
+#generate {
+    margin-top: 3rem;
+    margin-bottom: 0;
+}
 form {
     color: black;
     display: grid;
@@ -96,10 +117,11 @@ form {
     min-width: 60%;
     margin-top: 2rem;
     margin-bottom: 6rem;
-    border: 3px solid gray;
     border-radius: 2rem;
+    border: 2px solid gray;
     padding: 3rem;
     background-color: white;
+    box-shadow: 3.6px 7.2px 7.2px hsl(0deg 0% 0% / 0.39);
 }
 
 input[type='number'],
@@ -109,13 +131,14 @@ input[type='date'] {
     padding: 0.5rem;
     background-color: white;
     min-width: 80px;
-    box-shadow: 0 0 10px 8px rgba(255, 255, 255, 0.181);
+    max-width: 220px;
+    box-shadow: 3.6px 7.2px 7.2px hsl(0deg 0% 0% / 0.39);
 }
 
 table {
-    min-width: 70%;
+    width:90%;
     border-collapse: collapse;
-    box-shadow: 0 0 10px 8px rgba(255, 255, 255, 0.181);
+    box-shadow: 3.6px 7.2px 7.2px hsl(0deg 0% 0% / 0.39);
 }
 
 th {
@@ -140,18 +163,19 @@ tr:nth-child(odd) {
     text-align: center;
 }
 
+footer {
+    text-align: center;
+    margin-top: 3rem;
+}
+
 @media (max-width: 700px) {
     form {
         width: 80%;
     }
 
-    table {
-        width: 70%;
+    table{
+        width:80%;
     }
+
 }
 
-footer {
-    text-align: center;
-    color: white;
-    margin-top: 3rem;
-}
