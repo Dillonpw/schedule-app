@@ -35,7 +35,8 @@ function generateRotatingSchedule(workDays, offDays, totalDays, startDate) {
     return schedule;
 }
 
-function generateSchedule() {
+function generateSchedule(e) {
+    e.preventDefault();
     const workDays = parseInt(document.getElementById('workDays').value, 10);
     const offDays = parseInt(document.getElementById('offDays').value, 10);
     const totalDays = parseInt(document.getElementById('totalDays').value, 10);
